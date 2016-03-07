@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import com.example.shentanli.crosscall.com.nativetools.NativeDemo;
 
 public class MainActivity extends AppCompatActivity {
 
