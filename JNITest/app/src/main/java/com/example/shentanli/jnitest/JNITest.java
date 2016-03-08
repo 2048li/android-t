@@ -10,7 +10,7 @@ public class JNITest extends AppCompatActivity {
         System.loadLibrary("JNITest");
     }
 
-    public native String GetTest();
+    public native static String GetTest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
