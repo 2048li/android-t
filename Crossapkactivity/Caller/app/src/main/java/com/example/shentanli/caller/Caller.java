@@ -50,7 +50,9 @@ public class Caller extends AppCompatActivity {
             intent.setAction("android.intent.action.VIEW");
            // startActivities(intent);
             startActivity(intent);
-*/      find_class_from_packagename("com.example.shentanli.silentinstall");
+*/
+            //find_class_from_packagename("com.example.shentanli.silentinstall");
+            find_class_from_packagename("com.qihoo.appstore");
         }catch(Exception e){
             Log.v("go to apk error","----"+e.toString());
             Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT ).show();
@@ -73,8 +75,11 @@ public class Caller extends AppCompatActivity {
         }
         Intent resolveintent = new Intent(Intent.ACTION_MAIN,null);
         resolveintent.addCategory( Intent.CATEGORY_LAUNCHER);
+
+        //todo how to find the activity to exec the silent installation?
+
         resolveintent.setPackage(packageinfo.packageName);
-        List<ResolveInfo> resolveinfolist=getPackageManager().queryIntentActivities(resolveintent, 0);
+        List<ResolveInfo> resolveinfolist = getPackageManager().queryIntentActivities(resolveintent, 0);
         ResolveInfo resolveinfo = resolveinfolist.iterator().next();
         if (resolveinfo != null){
             String packageName = resolveinfo.activityInfo.packageName;
