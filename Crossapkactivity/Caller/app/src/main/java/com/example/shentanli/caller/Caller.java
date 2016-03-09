@@ -1,15 +1,20 @@
 package com.example.shentanli.caller;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Toast;
 
 public class Caller extends AppCompatActivity {
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,27 +31,23 @@ public class Caller extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_caller, menu);
-        return true;
-    }
+        try{
+            ComponentName componentname= new ComponentName("com.example.shentanli.callee","Callee");
+           /* System.out.println("the name of ......" + toActivity.getClassName().toString());*/
+            Intent intent = new Intent();
+            intent.setComponent(componentname);
+            intent.setAction("android.intent.action.VIEW");
+           // startActivities(intent);
+            startActivity(intent);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        }catch(Exception e){
+            Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT ).show();
+            Log.v("go to apk error","----"+e.toString());
         }
 
-        return super.onOptionsItemSelected(item);
+
+
     }
+
 }

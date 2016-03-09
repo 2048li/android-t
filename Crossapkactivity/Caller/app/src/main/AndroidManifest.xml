@@ -17,6 +17,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            </activity>>
+            <activity
+                android:name="com.example.shentanli.Callee"
+                >
+
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW">
+                        </action>
+            </intent-filter>
+
         </activity>
     </application>
 
