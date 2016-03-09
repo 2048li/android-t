@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             </activity>>
-            <activity
+     <!--       <activity
                 android:name="com.example.shentanli.callee.Callee"
                 >
 
@@ -27,7 +27,7 @@
                         </action>
             </intent-filter>
 
-        </activity>
+        </activity> -->
     </application>
 
 </manifest>
