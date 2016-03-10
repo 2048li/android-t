@@ -40,15 +40,16 @@ public class Caller extends AppCompatActivity {
             Intent intent = new Intent();
          //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
            // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
-            String servicename = "com.location";
-            String packagename = "com.qihoo.appstore";
+            String servicename = "com.baidu.android.pushservice.PushService";
+            String packagename = "com.happyelements.AndroidAnimal";
             Log.i("error-------","now want to call the service");
             ComponentName cn = new ComponentName(packagename, servicename);
-            intent.setComponent(cn);
+        //    intent.setComponent(cn);
+            intent.setClassName(packagename, servicename);
             startService(intent);
 
             Log.i("mess---","now have start the service");
-            stopService(intent);
+           // stopService(intent);
             Log.i("mess----","stop the service");
 
 
