@@ -1,11 +1,13 @@
 package com.example.shentanli.caller;
 
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -52,7 +54,24 @@ public class Caller extends AppCompatActivity {
             startActivity(intent);
 */
             //find_class_from_packagename("com.example.shentanli.silentinstall");
-            find_class_from_packagename("com.qihoo.appstore");
+        //    find_class_from_packagename("com.qihoo.appstore");
+            Log.i("to call service","now to call the service ");
+         //   find_service_from_packagename("com.qihoo.appstore","com.duoku.platform.single.gameplus.install.GPSilentInstallService");
+            Log.i("error----", "no service find");
+
+            Intent intent = new Intent();
+            String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+            String packagename = "com.qihoo.appstore";
+            Log.i("error-------","now want to call the service");
+            ComponentName cn = new ComponentName(packagename, servicename);
+            intent.setComponent(cn);
+            startService(intent);
+
+            Log.i("mess---","now have start the service");
+            stopService(intent);
+            Log.i("mess----","stop the service");
+
+
         }catch(Exception e){
             Log.v("go to apk error","----"+e.toString());
             Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT ).show();
@@ -90,6 +109,38 @@ public class Caller extends AppCompatActivity {
             ComponentName cn = new ComponentName(packageName,classname);
             intent.setComponent(cn);
             startActivity(intent);
+
+        }
+
+    }
+
+    private void find_service_from_packagename(String packagename, String servicename)
+    {
+        Log.i("the submethod ---", "now in the submethod");
+        PackageInfo packageinfo = null;
+        try
+        {
+            packageinfo = getPackageManager().getPackageInfo(packagename,0);
+
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Intent resolveintent = new Intent(Intent.ACTION_MAIN,null);
+        resolveintent.addCategory( Intent.CATEGORY_LAUNCHER);
+
+        resolveintent.setPackage(packageinfo.packageName);
+        List<ResolveInfo> resolveinfolist = getPackageManager().queryIntentServices(resolveintent, 0);
+
+        ResolveInfo resolveinfo = resolveinfolist.iterator().next();
+        if (resolveinfo.serviceInfo.equals(servicename)){
+            String packageName = resolveinfo.activityInfo.packageName;
+            Intent intent = new Intent();
+
+            ComponentName cn = new ComponentName(packageName,servicename);
+            Log.i("error----","find the equal service in this package");
+            intent.setComponent(cn);
+            startService(intent);
 
         }
 
