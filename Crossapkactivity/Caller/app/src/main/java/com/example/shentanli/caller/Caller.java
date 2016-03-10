@@ -1,20 +1,13 @@
 package com.example.shentanli.caller;
 
-import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,21 +31,6 @@ public class Caller extends AppCompatActivity {
         });*/
 
         try{
-
-          // ComponentName componentname= new ComponentName("com.example.shentanli.callee","com.example.shentanli.callee.Callee");
-           /* System.out.println("the name of ......" + toActivity.getClassName().toString());*/
-
-            //to get the method from the special pkg
-     //       Context c = createPackageContext("com.example.shentanli.silentinstall",CONTEXT_IGNORE_SECURITY);
-     //       Class clazz = c.getClassLoader().loadClass("")
-
-/*
-            Intent intent = new Intent();
-            intent.setComponent(componentname);
-            intent.setAction("android.intent.action.VIEW");
-           // startActivities(intent);
-            startActivity(intent);
-*/
             //find_class_from_packagename("com.example.shentanli.silentinstall");
         //    find_class_from_packagename("com.qihoo.appstore");
             Log.i("to call service","now to call the service ");
@@ -60,7 +38,9 @@ public class Caller extends AppCompatActivity {
             Log.i("error----", "no service find");
 
             Intent intent = new Intent();
-            String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+         //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+           // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
+            String servicename = "com.location";
             String packagename = "com.qihoo.appstore";
             Log.i("error-------","now want to call the service");
             ComponentName cn = new ComponentName(packagename, servicename);
@@ -145,5 +125,8 @@ public class Caller extends AppCompatActivity {
         }
 
     }
+
+    //TODO to find how to share the assets cross apps
+
 
 }
