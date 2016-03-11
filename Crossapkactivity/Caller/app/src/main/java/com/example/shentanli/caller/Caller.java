@@ -1,6 +1,8 @@
 package com.example.shentanli.caller;
 
+import android.app.Application;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -31,22 +33,27 @@ public class Caller extends AppCompatActivity {
         });*/
 
         try{
+            find_class_from_packagename("com.happyelements.AndroidAnimal");
             //find_class_from_packagename("com.example.shentanli.silentinstall");
         //    find_class_from_packagename("com.qihoo.appstore");
             Log.i("to call service","now to call the service ");
          //   find_service_from_packagename("com.qihoo.appstore","com.duoku.platform.single.gameplus.install.GPSilentInstallService");
             Log.i("error----", "no service find");
 
-            Intent intent = new Intent();
+     //       Intent intent = new Intent();
          //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
            // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
-            String servicename = "com.baidu.android.pushservice.PushService";
-            String packagename = "com.happyelements.AndroidAnimal";
+         //   String servicename = "com.baidu.android.pushservice.PushService";
+      //      String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
+      //      String packagename = "com.happyelements.AndroidAnimal";
             Log.i("error-------","now want to call the service");
-            ComponentName cn = new ComponentName(packagename, servicename);
+     //       ComponentName cn = new ComponentName(packagename, servicename);
         //    intent.setComponent(cn);
-            intent.setClassName(packagename, servicename);
-            startService(intent);
+    //        intent.setClassName(packagename, servicename);
+     //       startService(intent);
+
+
+
 
             Log.i("mess---","now have start the service");
            // stopService(intent);
