@@ -145,6 +145,15 @@ public class Caller extends AppCompatActivity {
 
     }
 
+    public void bind_service_from_package(String packagename, String service)
+    {
+
+    }
+
+
+
+
+
     //TODO to find how to share the assets cross apps
 
 
