@@ -1,6 +1,7 @@
 package com.example.shentanli.dataflushtest;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +16,22 @@ import java.io.OutputStream;
 
 public class MainActivity extends Activity {
 
+    private static MainActivity instance;
+    public MainActivity(){
+        instance = this;
+    }
+
+    public static Context getContext()
+    {
+        return instance;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Context strins = getContext();
+        Log.i("shentanli--context..",strins.getPackageName());
+
         test_build();
         is_root();
       /*  try {
