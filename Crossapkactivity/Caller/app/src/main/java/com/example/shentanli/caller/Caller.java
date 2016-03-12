@@ -33,31 +33,42 @@ public class Caller extends AppCompatActivity {
         });*/
 
         try{
-            find_class_from_packagename("com.happyelements.AndroidAnimal");
+          //  find_class_from_packagename("com.happyelements.AndroidAnimal");
             //find_class_from_packagename("com.example.shentanli.silentinstall");
         //    find_class_from_packagename("com.qihoo.appstore");
-            Log.i("to call service","now to call the service ");
+       //     Log.i("to call service","now to call the service ");
          //   find_service_from_packagename("com.qihoo.appstore","com.duoku.platform.single.gameplus.install.GPSilentInstallService");
-            Log.i("error----", "no service find");
+       //     Log.i("error----", "no service find");
 
-     //       Intent intent = new Intent();
+            Intent intent = new Intent();
          //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
            // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
          //   String servicename = "com.baidu.android.pushservice.PushService";
-      //      String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
-      //      String packagename = "com.happyelements.AndroidAnimal";
-            Log.i("error-------","now want to call the service");
-     //       ComponentName cn = new ComponentName(packagename, servicename);
-        //    intent.setComponent(cn);
-    //        intent.setClassName(packagename, servicename);
-     //       startService(intent);
+            String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
+            String servicename2 = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+            String packagename = "com.happyelements.AndroidAnimal";
+            Log.i("shentanli----","start the downservice");
+          //  ComponentName cn = new ComponentName(packagename, servicename);
+          //  intent.setComponent(cn);
+            //actually call in this way _ implicit intents with startservice will be tagged unsafe.
+            intent.setAction("com.baidu.platform.gameplus.service");
+      //      intent.setClassName(packagename, servicename);
+            startService(intent);
+
+       /*     Log.i("shentanli---","start installaservice");
+            ComponentName cn2 = new ComponentName(packagename, servicename2);
+            intent.setComponent(cn2);
+            intent.setClassName(packagename, servicename2);
+            startService(intent);
+*/
+        //    find_service_from_packagename(packagename, servicename);
+        //    find_service_from_packagename(packagename, servicename2);
 
 
 
-
-            Log.i("mess---","now have start the service");
+        //    Log.i("mess---","now have start the service");
            // stopService(intent);
-            Log.i("mess----","stop the service");
+        //    Log.i("mess----","stop the service");
 
 
         }catch(Exception e){
