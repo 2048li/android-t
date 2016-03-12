@@ -1,13 +1,13 @@
 package com.example.shentanli.caller;
 
-import android.app.Application;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import java.util.List;
 
 public class Caller extends AppCompatActivity {
+
+    private Object mBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,9 @@ public class Caller extends AppCompatActivity {
 
         //    Log.i("mess---","now have start the service");
            // stopService(intent);
-        //    Log.i("mess----","stop the service");
+            Log.i("shentnali----","call service test");
+          //  bind_service_from_package();
+            bind_service_from_package(packagename, servicename);
 
 
         }catch(Exception e){
@@ -113,6 +117,7 @@ public class Caller extends AppCompatActivity {
 
     }
 
+
     private void find_service_from_packagename(String packagename, String servicename)
     {
         Log.i("the submethod ---", "now in the submethod");
@@ -145,14 +150,61 @@ public class Caller extends AppCompatActivity {
 
     }
 
-    public void bind_service_from_package(String packagename, String service)
+
+//    MyInterface mBinder;
+  //  Intent mService = null;
+
+    public void bind_service_from_package(String packagename, String servicename)
+    //public void bind_service_from_package()
     {
+
+    /*   Myserviceconnection conn;
+
+        mService = new Intent(Caller.this, Myservice.class);
+        Log.i("shentanli---myservice.class---",Myservice.class.toString());
+        conn = new Myserviceconnection();
+        Log.i("shentanli---","now to bind service");
+        bindService(mService, conn, BIND_AUTO_CREATE);
+        Log.i("shentanli-----","now to start service");
+        startService(mService);*/
+        Log.i("the submethod ---", "now in the bind submethod");
+
+
+            Intent intent = new Intent();
+
+
+            ComponentName cn = new ComponentName(packagename,servicename);
+            Log.i("error----", "find the equal service in this package");
+            intent.setComponent(cn);
+            intent.setAction("com.baidu.platform.single.gameplus.service");
+
+            startService(intent);
+            Myserviceconnection conn = new Myserviceconnection();
+            bindService(intent, conn, BIND_AUTO_CREATE);
+
+
+        }
 
     }
 
 
+    private  class Myserviceconnection implements ServiceConnection {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.i("shentanli-----","now in the onserviceconnected method");
+          //  Caller.this.mBinder = (MyInterface) service;
 
 
+
+            Log.i("shentanli----","callmethod finished");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    }
 
     //TODO to find how to share the assets cross apps
 
