@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Caller extends AppCompatActivity {
@@ -72,7 +73,7 @@ public class Caller extends AppCompatActivity {
            // stopService(intent);
             Log.i("shentnali----","call service test");
           //  bind_service_from_package();
-            bind_service_from_package(packagename, servicename);
+          //  bind_service_from_package(packagename, servicename);
 
 
         }catch(Exception e){
@@ -80,6 +81,17 @@ public class Caller extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT ).show();
             Log.v("go to apk error","----"+e.toString());
         }
+
+        Runtime rt = Runtime.getRuntime();
+        try {
+            Process proc = rt.exec("su");
+            int exitVal = proc.exitValue();
+            Log.i("shentanli---","the exit value of execute su :"+exitVal);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
    //if know only the packagename, you want to get the activity.
@@ -185,7 +197,6 @@ public class Caller extends AppCompatActivity {
 
         }
 
-    }
 
 
     private  class Myserviceconnection implements ServiceConnection {
