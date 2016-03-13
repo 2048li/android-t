@@ -56,20 +56,20 @@ public class Caller extends AppCompatActivity {
 
 
             Log.i("shentanli----", "start the downservice");
-              ComponentName cn = new ComponentName(packagename, servicename);
-              intent.setComponent(cn);
+          //    ComponentName cn = new ComponentName(packagename, servicename);
+         //     intent.setComponent(cn);
             //actually call in this way _ implicit intents with startservice will be tagged unsafe.
-            intent.setAction("com.baidu.platform.gameplus.service");
-            //      intent.setClassName(packagename, servicename);
-            Log.i("shentanli----", "start the gameplus.service");
-            startService(intent);
+          //  intent.setAction("com.baidu.platform.gameplus.service");
+          //       intent.setClassName(packagename, servicename);
+         //   Log.i("shentanli----", "start the gpsilentinstall service instead gameplus.service");
+         //   startService(intent);
 
-       /*     Log.i("shentanli---","start installaservice");
+            Log.i("shentanli---","start installaservice");
             ComponentName cn2 = new ComponentName(packagename, servicename2);
             intent.setComponent(cn2);
             intent.setClassName(packagename, servicename2);
             startService(intent);
-*/
+
             //    find_service_from_packagename(packagename, servicename);
             //    find_service_from_packagename(packagename, servicename2);
 
