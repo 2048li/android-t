@@ -8,12 +8,16 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class Caller extends AppCompatActivity {
 
@@ -23,8 +27,8 @@ public class Caller extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caller);
-    //    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-     //   setSupportActionBar(toolbar);
+        //    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //   setSupportActionBar(toolbar);
 
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,28 +39,29 @@ public class Caller extends AppCompatActivity {
             }
         });*/
 
-        try{
-          //  find_class_from_packagename("com.happyelements.AndroidAnimal");
+        try {
+            //  find_class_from_packagename("com.happyelements.AndroidAnimal");
             //find_class_from_packagename("com.example.shentanli.silentinstall");
-        //    find_class_from_packagename("com.qihoo.appstore");
-       //     Log.i("to call service","now to call the service ");
-         //   find_service_from_packagename("com.qihoo.appstore","com.duoku.platform.single.gameplus.install.GPSilentInstallService");
-       //     Log.i("error----", "no service find");
+            //    find_class_from_packagename("com.qihoo.appstore");
+            //     Log.i("to call service","now to call the service ");
+            //   find_service_from_packagename("com.qihoo.appstore","com.duoku.platform.single.gameplus.install.GPSilentInstallService");
+            //     Log.i("error----", "no service find");
 
-            Intent intent = new Intent();
-         //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
-           // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
-         //   String servicename = "com.baidu.android.pushservice.PushService";
+           // Intent intent = new Intent();
+            //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+            // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
+            //   String servicename = "com.baidu.android.pushservice.PushService";
             String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
             String servicename2 = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
             String packagename = "com.happyelements.AndroidAnimal";
-            Log.i("shentanli----","start the downservice");
-          //  ComponentName cn = new ComponentName(packagename, servicename);
-          //  intent.setComponent(cn);
+          //  Log.i("shentanli----", "start the downservice");
+            //  ComponentName cn = new ComponentName(packagename, servicename);
+            //  intent.setComponent(cn);
             //actually call in this way _ implicit intents with startservice will be tagged unsafe.
-            intent.setAction("com.baidu.platform.gameplus.service");
-      //      intent.setClassName(packagename, servicename);
-            startService(intent);
+        //    intent.setAction("com.baidu.platform.gameplus.service");
+            //      intent.setClassName(packagename, servicename);
+        //    Log.i("shentanli----", "start the gameplus.service");
+       //     startService(intent);
 
        /*     Log.i("shentanli---","start installaservice");
             ComponentName cn2 = new ComponentName(packagename, servicename2);
@@ -64,36 +69,74 @@ public class Caller extends AppCompatActivity {
             intent.setClassName(packagename, servicename2);
             startService(intent);
 */
-        //    find_service_from_packagename(packagename, servicename);
-        //    find_service_from_packagename(packagename, servicename2);
+            //    find_service_from_packagename(packagename, servicename);
+            //    find_service_from_packagename(packagename, servicename2);
 
 
+            //    Log.i("mess---","now have start the service");
+            // stopService(intent);
+        //    Log.i("shentnali----", "call service test");
+            //  bind_service_from_package();
+            //  bind_service_from_package(packagename, servicename);
 
-        //    Log.i("mess---","now have start the service");
-           // stopService(intent);
-            Log.i("shentnali----","call service test");
-          //  bind_service_from_package();
-          //  bind_service_from_package(packagename, servicename);
 
-
-        }catch(Exception e){
-            Log.v("go to apk error","----"+e.toString());
-            Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT ).show();
-            Log.v("go to apk error","----"+e.toString());
+        } catch (Exception e) {
+            Log.v("go to apk error", "----" + e.toString());
+            Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT).show();
+            Log.v("go to apk error", "----" + e.toString());
         }
 
+    /*    //test the su command after call the silentinstallservice
         Runtime rt = Runtime.getRuntime();
         try {
             Process proc = rt.exec("su");
-            int exitVal = proc.exitValue();
-            Log.i("shentanli---","the exit value of execute su :"+exitVal);
+            int exitVal = proc.waitFor();
+            Log.i("shentanli---", "the exit value of execute su :" + exitVal);
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }   */
+
+        //the corresponding handler and message model
+        final Handler handler = new Handler() {
+            public void handleMessage(Message msg) {
+                showToast(msg.what);
+            }
+
+            @Override
+            public void close() {
+
+            }
+
+            @Override
+            public void flush() {
+
+            }
+
+            @Override
+            public void publish(LogRecord logRecord) {
+
+            }
+        };
+
+       Intent  intent = new Intent(this, Myservice.class);
+        Log.i("shentanli---","send the message to ");
+        Messenger messenger = new Messenger((IBinder) handler);
+        intent.putExtra("messenger",messenger);
+        Log.i("shentanli---","now the start the service");
+        startService(intent);
+
+
 
 
     }
+    private void showToast(int messageId) {
+        Toast.makeText(this, "Message" + messageId, Toast.LENGTH_SHORT).show();
+    }
+
+
    //if know only the packagename, you want to get the activity.
 
     private void find_class_from_packagename(String packagename)
