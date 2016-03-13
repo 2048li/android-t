@@ -38,6 +38,13 @@ public class Caller extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+        Intent intent = new Intent();
+        //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+        // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
+        //   String servicename = "com.baidu.android.pushservice.PushService";
+        String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
+        String servicename2 = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+        String packagename = "com.happyelements.AndroidAnimal";
 
         try {
             //  find_class_from_packagename("com.happyelements.AndroidAnimal");
@@ -47,21 +54,15 @@ public class Caller extends AppCompatActivity {
             //   find_service_from_packagename("com.qihoo.appstore","com.duoku.platform.single.gameplus.install.GPSilentInstallService");
             //     Log.i("error----", "no service find");
 
-           // Intent intent = new Intent();
-            //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
-            // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
-            //   String servicename = "com.baidu.android.pushservice.PushService";
-            String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
-            String servicename2 = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
-            String packagename = "com.happyelements.AndroidAnimal";
-          //  Log.i("shentanli----", "start the downservice");
-            //  ComponentName cn = new ComponentName(packagename, servicename);
-            //  intent.setComponent(cn);
+
+            Log.i("shentanli----", "start the downservice");
+              ComponentName cn = new ComponentName(packagename, servicename);
+              intent.setComponent(cn);
             //actually call in this way _ implicit intents with startservice will be tagged unsafe.
-        //    intent.setAction("com.baidu.platform.gameplus.service");
+            intent.setAction("com.baidu.platform.gameplus.service");
             //      intent.setClassName(packagename, servicename);
-        //    Log.i("shentanli----", "start the gameplus.service");
-       //     startService(intent);
+            Log.i("shentanli----", "start the gameplus.service");
+            startService(intent);
 
        /*     Log.i("shentanli---","start installaservice");
             ComponentName cn2 = new ComponentName(packagename, servicename2);
@@ -99,7 +100,8 @@ public class Caller extends AppCompatActivity {
             e.printStackTrace();
         }   */
 
-        //the corresponding handler and message model
+        /*
+        //the corresponding handler and message model: this is the way to call method in an activity from a service
         final Handler handler = new Handler() {
             public void handleMessage(Message msg) {
                 showToast(msg.what);
@@ -127,6 +129,10 @@ public class Caller extends AppCompatActivity {
         intent.putExtra("messenger",messenger);
         Log.i("shentanli---","now the start the service");
         startService(intent);
+*/
+        //message and handler model to call method from service from activity
+        //call method from gpsilentinstallservice
+      //seems not work out...
 
 
 
