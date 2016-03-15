@@ -14,7 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
@@ -38,15 +43,15 @@ public class Caller extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-        Intent intent = new Intent();
+     //   Intent intent = new Intent();
         //   String servicename = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
         // 上一个应用的SERVICE其实不太清楚具体干什么；不如调用显示的LOCATION.
-          String servicename = "com.baidu.android.pushservice.PushService";
+    //      String servicename = "com.baidu.android.pushservice.PushService";
       //  String servicename = "com.duoku.platform.single.gameplus.service.GPDownloadService";
-        String servicename2 = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
-        String packagename = "com.happyelements.AndroidAnimal";
+     //   String servicename2 = "com.duoku.platform.single.gameplus.install.GPSilentInstallService";
+    //    String packagename = "com.happyelements.AndroidAnimal";
 
-        try {
+   //     try {
             //  find_class_from_packagename("com.happyelements.AndroidAnimal");
             //find_class_from_packagename("com.example.shentanli.silentinstall");
             //    find_class_from_packagename("com.qihoo.appstore");
@@ -55,16 +60,16 @@ public class Caller extends AppCompatActivity {
             //     Log.i("error----", "no service find");
 
 
-            Log.i("shentanli----", "start the BAIDU PUSH service");
-              ComponentName cn = new ComponentName(packagename, servicename);
-              intent.setComponent(cn);
+      //      Log.i("shentanli----", "start the BAIDU PUSH service");
+      //        ComponentName cn = new ComponentName(packagename, servicename);
+      //        intent.setComponent(cn);
             //actually call in this way _ implicit intents with startservice will be tagged unsafe.
             //   intent.setAction("com.baidu.platform.gameplus.service");
-            intent.setAction("com.baidu.android.pushservice.action.PUSH_SERVICE");
-                 intent.setClassName(packagename, servicename);
+     //       intent.setAction("com.baidu.android.pushservice.action.PUSH_SERVICE");
+    //             intent.setClassName(packagename, servicename);
          //   Log.i("shentanli----", "start the gpsilentinstall service instead gameplus.service");
-            startService(intent);
-            Log.i("shentanli---","start push service finished");
+     //       startService(intent);
+     //       Log.i("shentanli---","start push service finished");
             //the fact is that this element app can get root permission just on the limited manufatures
 
         /*    Log.i("shentanli---","start installaservice");
@@ -77,18 +82,19 @@ public class Caller extends AppCompatActivity {
             //    find_service_from_packagename(packagename, servicename2);
 
 
+
             //    Log.i("mess---","now have start the service");
             // stopService(intent);
         //    Log.i("shentnali----", "call service test");
             //  bind_service_from_package();
             //  bind_service_from_package(packagename, servicename);
 
-
+/*
         } catch (Exception e) {
             Log.v("go to apk error", "----" + e.toString());
             Toast.makeText(getApplicationContext(), "没找到程序", Toast.LENGTH_SHORT).show();
             Log.v("go to apk error", "----" + e.toString());
-        }
+        }*/
 
     /*    //test the su command after call the silentinstallservice
         Runtime rt = Runtime.getRuntime();
@@ -102,6 +108,8 @@ public class Caller extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }   */
+
+
 
         /*
         //the corresponding handler and message model: this is the way to call method in an activity from a service
@@ -138,6 +146,25 @@ public class Caller extends AppCompatActivity {
       //seems not work out...
 
 
+
+        //test the socket _ an app from local send data to the local listener
+        try{
+
+
+            Log.i("shentanli---","begin to connect the server");
+           String host = "127.0.0.1";
+            int port = 38517;
+            Socket socket = new Socket(host, port);
+            PrintWriter printwrite = new PrintWriter(socket.getOutputStream(), true);
+            Log.i("shentnali--","send data");
+            printwrite.print("hello, client, server visit");
+            printwrite.flush();
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
