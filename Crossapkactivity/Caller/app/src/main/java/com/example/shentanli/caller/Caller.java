@@ -27,10 +27,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Handler;
+import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
 public class Caller extends AppCompatActivity {
@@ -152,7 +154,7 @@ public class Caller extends AppCompatActivity {
         //message and handler model to call method from service from activity
         //call method from gpsilentinstallservice
         //seems not work out...
-        String packagename = "com.qihoo.appstore";
+     /*   String packagename = "com.qihoo.appstore";
         String res = "";
         try {
             read_png_from_others(packagename,res);
@@ -173,7 +175,7 @@ public class Caller extends AppCompatActivity {
             printwrite.print("hello, client, server visit");
             printwrite.flush();*/
 
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+   /*         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             //test the datagramsocket
            Log.i("shentali", "use the datagramsocket");
@@ -221,10 +223,41 @@ public class Caller extends AppCompatActivity {
             e.printStackTrace();
        } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        int port = getFreePort(432);
+        Log.i("shentnali---","free port is:--" + port);
+
+
+
 
 
     }
+
+   protected int getFreePort(int port) {
+       int v0 = port;
+       while (true) {
+           if (v0 < 65000) {
+               try {
+                   new ServerSocket(v0).close();
+                   return v0;
+               } catch (IOException e) {
+                   Log.i("shentanli", "getfreeport" + e.getMessage());
+                   v0++;
+                   continue;
+               }
+           } else {
+               return -1;
+           }
+         // return v0;
+       }
+     //  return -1;
+   }
+
+
+
+
+
+
 
     Handler handler = new Handler() {
         @Override
