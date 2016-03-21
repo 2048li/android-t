@@ -31,6 +31,12 @@
             </intent-filter>android app listen portandroid app listen port
 
         </activity> -->
+        <receiver android:name=".Caller$Mbroadcastreceiver">
+            <intent-filter>
+                <action android:name ="com.youku.phone.intent." />
+
+        </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

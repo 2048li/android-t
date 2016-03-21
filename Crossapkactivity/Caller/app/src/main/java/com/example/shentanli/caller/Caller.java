@@ -1,38 +1,24 @@
 package com.example.shentanli.caller;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Handler;
-import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
 public class Caller extends AppCompatActivity {
@@ -224,10 +210,14 @@ public class Caller extends AppCompatActivity {
        } catch (IOException e) {
             e.printStackTrace();
         }*/
-        int port = getFreePort(432);
-        Log.i("shentnali---","free port is:--" + port);
+    //    int port = getFreePort(432);
+    //    Log.i("shentnali---","free port is:--" + port);
 
-
+     //register receiver dynamically
+        String receivername = "com.youku.phone.intent.";
+        IntentFilter filter = new IntentFilter(receivername);
+        Mbroadcastreceiver receiver = new Mbroadcastreceiver();
+        registerReceiver(receiver, filter);
 
 
 
@@ -295,6 +285,18 @@ public class Caller extends AppCompatActivity {
             handler.sendMessage(msg);
         }*/
     };
+
+
+
+
+    // register a broadcastreceiver in the malicious app to receive the broadcast from the potential app
+    public class Mbroadcastreceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent)
+        {
+            //TODO write the receive action: find in the manifest.xml
+
+        }
+    }
 
 
  /*   private void showToast(int messageId) {
