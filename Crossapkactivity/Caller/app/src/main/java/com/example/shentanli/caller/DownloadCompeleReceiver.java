@@ -4,12 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.util.Log;
-
-import java.util.List;
 
 /**
  * Created by shentanli on 3/22/16.
@@ -39,6 +34,7 @@ class DownloadCompleteReceiver extends BroadcastReceiver {
 
 
     }
+
 
 
 }
