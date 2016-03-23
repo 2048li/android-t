@@ -4,6 +4,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.receive_boot_completed" />
+    <uses-permission android:name="android.permission.package_usage_stats" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED" />
+    <uses-permission android:name="android.permission.write_external_storage" />
 
     <application
         android:allowBackup="true"
@@ -31,11 +35,16 @@
             </intent-filter>android app listen portandroid app listen port
 
         </activity> -->
-        <receiver android:name=".Caller$Mbroadcastreceiver">
+   <!-- <receiver android:name=".Caller$Mbroadcastreceiver">
             <intent-filter>
                 <action android:name ="com.youku.phone.intent." />
 
         </intent-filter>
+        </receiver> -->
+        <receiver android:name=".Caller$DownloadCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.client.receiver.DownloadCompeleReceiver" />
+            </intent-filter>
         </receiver>
     </application>
 
