@@ -41,7 +41,7 @@
 
         </intent-filter>
         </receiver> -->
-        <receiver android:name=".Caller$DownloadCompleteReceiver" >
+        <receiver android:name=".DownloadCompleteReceiver" android:exported="true"  android:enabled="true">
             <intent-filter>
                 <action android:name="android.client.receiver.DownloadCompeleReceiver" />
             </intent-filter>
