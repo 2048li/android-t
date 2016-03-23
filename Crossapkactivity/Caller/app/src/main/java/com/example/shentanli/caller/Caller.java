@@ -4,40 +4,21 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Handler;
-import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
 public class Caller extends AppCompatActivity {
@@ -291,6 +272,8 @@ public class Caller extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+        Log.i("shentanli--","now toregister");
+        Dynamicregister("android.client.receiver.DownloadCompeleReceiver");
 
 
 
@@ -515,9 +498,22 @@ public class Caller extends AppCompatActivity {
         public void onServiceDisconnected(ComponentName name) {
 
         }
+
     }
 
     //TODO to find how to share the assets cross apps
+
+
+    //dynamic register
+    public void Dynamicregister(String action){
+        BroadcastReceiver mbroadcastreceiver = new DownloadCompleteReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(action);
+        registerReceiver(mbroadcastreceiver, intentFilter);
+
+    }
+
+
 
 
 
