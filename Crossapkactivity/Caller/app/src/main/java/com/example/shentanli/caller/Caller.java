@@ -24,6 +24,7 @@ import java.util.logging.LogRecord;
 public class Caller extends AppCompatActivity {
 
     private Object mBinder;
+    BroadcastReceiver mbroadcastreceiver = new DownloadCompeleReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,12 +274,24 @@ public class Caller extends AppCompatActivity {
             e.printStackTrace();
         }*/
         Log.i("shentanli--","now toregister");
-        Dynamicregister("android.client.receiver.DownloadCompeleReceiver");
+       Dynamicregister("android.client.receiver.DownloadCompeleReceiver");
 
 
+//        Intent intent = new Intent();
+      //  intent.setAction("android.intent.action.PACKAGE_ADDED");
+       // intent.putExtra("datastring","com.youku.phone");
+      //  ComponentName componentname = new ComponentName("com.youku.phone","com.youku.phone.PackageChangeReceiver");
+      //  intent.setComponent(componentname);
+     //   sendBroadcast(intent);
 
 
  }
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        Unregister();
+    }
 
 
 
@@ -506,16 +519,48 @@ public class Caller extends AppCompatActivity {
 
     //dynamic register
     public void Dynamicregister(String action){
-        BroadcastReceiver mbroadcastreceiver = new DownloadCompleteReceiver();
+      //  BroadcastReceiver mbroadcastreceiver = new DownloadCompleteReceiver();
         IntentFilter intentFilter = new IntentFilter();
+        intentFilter.setPriority(Integer.MAX_VALUE);
         intentFilter.addAction(action);
         registerReceiver(mbroadcastreceiver, intentFilter);
 
     }
 
+    public void Unregister()
+    {
+        unregisterReceiver(mbroadcastreceiver);
+    }
 
+/*
+    static class DownloadCompeleReceiver extends BroadcastReceiver {
+        public DownloadCompeleReceiver() {
+            super();
+        }
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("shentanli", "in the receiver");
+            Log.i("shentanli", "intent :" + intent.toString());
+            String name = "com.letv.android.client";
+            Log.i("shentanli", "to start the activity from other app");
+            if (intent.getAction().equalsIgnoreCase("android.client.receiver.DownloadCompeleReceiver")) {
+                Log.i("shentanli", "solve the intent....");
+                //find_class_from_packagename(name);
 
+                // ComponentName componentName = new ComponentName("com.letv.android.client","com.letv.lepay.sample.wxapi.WXPayEntryActivity");
+                ComponentName componentName = new ComponentName("com.youku.phone","com.youku.ui.activity.LoginRegistCardViewDialogActivity");
+                intent = new Intent();
+                intent.setAction("com.youku.ui.activity.LoginRegistCardViewDialogActivity");
+
+                intent.setComponent(componentName);
+                context.startActivity(intent);
+
+            } else
+                Log.i("shentanli", "no action");
+        }
+
+    }*/
 
 }
 
