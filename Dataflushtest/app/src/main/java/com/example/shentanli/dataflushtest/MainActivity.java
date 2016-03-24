@@ -39,6 +39,9 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+
+        System.out.println(System.getenv("PATH"));
+        Log.i("shentanli",System.getenv("PATH"));
     }
 
 
