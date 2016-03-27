@@ -12,6 +12,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Objects;
 
 
 public class MainActivity extends Activity {
@@ -39,6 +40,21 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+
+     /*   System.out.println(System.getenv("PATH"));
+        Log.i("shentanli--PATH",System.getenv("PATH"));
+        try {
+            Class v0 = Class.forName("android.content.pm.IPackageManager");
+            String s = v0.getName();
+            Log.i("shentanli---classname:",s);
+
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+*/
+
+
     }
 
 

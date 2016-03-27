@@ -16,8 +16,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
@@ -233,18 +235,18 @@ public class Caller extends AppCompatActivity {
         Log.i("shentanli---","create new file");
       //  String v5 = "/data/data/com.letv.android.client/ltsysu";
 
-  /*      Process v8 = null;
+        Process v8 = null;
         try {
             Log.i("shentanli--","exec su");
             Log.i("shentnali","get root");
             v8 = Runtime.getRuntime().exec("su");
-          //  v8.waitFor();
+            v8.waitFor();
        //     Log.i("shentanli","wait finished");
         } catch (IOException e) {
             e.printStackTrace();
-        }/* catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+        }catch (InterruptedException e) {
+            e.printStackTrace();}
+
 
      //   Log.i("shentanli","to new file in data/data");
 
@@ -283,9 +285,35 @@ public class Caller extends AppCompatActivity {
       //  ComponentName componentname = new ComponentName("com.youku.phone","com.youku.phone.PackageChangeReceiver");
       //  intent.setComponent(componentname);
      //   sendBroadcast(intent);
+        try{
+            Class<?> activityManagerNative = Class.forName("android.app.ActivityManagerNative");
+            Log.i("shentanli","activitymanagernative");
+            Object am = activityManagerNative.getMethod("getDefault").invoke(activityManagerNative);
+            Log.i("shentanli---amtype",am.getClass().toString());
+            Object config = am.getClass().getMethod("getConfiguration").invoke(am);
+            Log.i("configType",config.getClass().toString());
+            Log.i("shentanli--","change lanaguage");
+           // v8.waitFor();
+            config.getClass().getDeclaredField("locale").set(config, Locale.CHINA);
+            config.getClass().getDeclaredField("userSetLocale").setBoolean(config,true);
+            am.getClass().getMethod("updateConfiguration",android.content.res.Configuration.class).invoke(am,config);
 
 
- }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+
+    }
     @Override
     public void onDestroy()
     {
