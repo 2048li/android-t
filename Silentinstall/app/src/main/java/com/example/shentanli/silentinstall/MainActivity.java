@@ -49,19 +49,20 @@ public class MainActivity extends Activity{
       //  installb.setOnClickListener(this);
       //  uninstallb.setOnClickListener(this);
         Log.i("message","finished create button");
-
-
-        //
+      //
         Process process;
         try {
             Log.i("message","inter the install process");
-            String cmd = "su -c pm install -r -d /sdcard/test.apk";
+        //    String cmd = "su -c pm install -r -d /sdcard/test.apk";
+            String cmd = new Bodymethod().getcmd();
             process = Runtime.getRuntime().exec(cmd);
            // process = Runtime.getRuntime().exec(new String[] {"pm install -r -d sdcard/test.apk"});
 
           //  process = Runtime.getRuntime().exec(new String[] {"su", "-c", "cp /sdcard/test.apk /system/app/"});
             Log.i("message","after install");
             process.waitFor();
+        //    Bodymethod cm = new Bodymethod();
+      //      cm.bodymethod(cmd);
 
         } catch (IOException e) {
             e.printStackTrace();
