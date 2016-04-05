@@ -3,6 +3,7 @@
     <words>
       <w>installb</w>
       <w>packagename</w>
+      <w>prng</w>
       <w>uninstallb</w>
     </words>
   </dictionary>
