@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Accessibility_Apk</string>
+    <string name="acc_auto_install_service_name">accessibility install</string>
+</resources>
