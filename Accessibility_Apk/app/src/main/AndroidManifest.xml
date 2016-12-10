@@ -3,6 +3,9 @@
     package="com.example.shentanli.accessibility_apk">
 
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ToastnotificationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <service android:enabled="@bool/enable_accessibility" android:label="@string/acc_auto_install_service_name" android:name=".MyAccessibilityService" android:exported="true"
+        <service android:enabled="@bool/enable_accessibility" android:label= "@string/acc_auto_install_service_name" android:name=".AutoInstallService" android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -27,6 +30,22 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_config" />
         </service>
+        <service android:name =".Toastnotification" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+        </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_config" />
+        </service>
+        <service android:name=".TexttoVoice" android:permission="android.pemrission.BIND_ACCESSIBILITY_SERVICE" android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice"
+                android:resource="@xml/ttsconfig" />
+        </service>
+
     </application>
 
 </manifest>

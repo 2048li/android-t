@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,33 +10,36 @@
     tools:context="com.example.shentanli.accessibility_apk.MainActivity"
     android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_width="wrap_content"
+        android:orientation="vertical" >
+
+
     <TextView
         android:id="@+id/tv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="accessibility install"/>
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="install app"
-        />
+        android:text="accessibility open"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="floatingbutton install"/>
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="click to install" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="this is a toolbar install"
-        />
+        <com.example.shentanli.accessibility_apk.List_View
+            android:id="@+id/mylist"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" >
+            </com.example.shentanli.accessibility_apk.List_View>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/stop"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="stop to voice"/>
+
+    </LinearLayout>
+
+</ScrollView>

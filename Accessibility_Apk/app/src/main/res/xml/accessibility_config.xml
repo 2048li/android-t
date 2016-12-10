@@ -2,6 +2,7 @@
 <accessibility-service xmlns:android="http://schemas.android.com/tools"
     android:accessibilityEventType="typeAllMask"
     android:accessibilityFeedbackType = "feedbackGeneric" android:notificationTImeout = "100"
+    android:packagename="com.android.packageinstaller"
     android:accessibilityFlags="flagDefault|flagReportViewIds"
     android:canRetrieveWindowContent="true" />
 

@@ -1,27 +1,14 @@
 package com.example.shentanli.silentinstall;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 
-import java.io.BufferedReader;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-
-import static com.example.shentanli.silentinstall.R.id.installbutton;
-import static com.example.shentanli.silentinstall.R.id.uninstallbutton;
 
 
 //public class MainActivity extends Activity implements View.OnClickListener{
