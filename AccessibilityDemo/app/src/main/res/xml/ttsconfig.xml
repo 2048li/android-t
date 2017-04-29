@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <accessibility-service xmlns:android="http://schemas.android.com/tools"
+        android:accessibilityEventType="typeAllMask"
+        android:accessibilityFeedbackType = "feedbackSpoken" android:notificationTImeout = "100"
+        android:packagename="com.example.shentanli.accessibilitydemo"
+        android:accessibilityFlags="flagDefault|flagReportViewIds"
+        android:canRetrieveWindowContent="true" />

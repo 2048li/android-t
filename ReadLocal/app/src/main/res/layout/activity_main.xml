@@ -24,4 +24,24 @@
         android:gravity="center"
         android:onClick="onclicklistener" />
 
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_weight="wrap_content"
+        android:id="@+id/sdbtr" />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_weight="wrap_content"
+        android:id="@+id/sdbtw" />
+
+    <EditText
+        android:id="@+id/ed1"
+        android:layout_height="wrap_content"
+        android:layout_weight="wrap_content"/>
+
+    <EditText
+        android:id="@+id/ed2"
+        android:layout_height="wrap_content"
+        android:layout_weight="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>

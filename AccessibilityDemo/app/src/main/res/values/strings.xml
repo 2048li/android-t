@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Accessibility_Apk</string>
+    <string name="acc_auto_install_service_name">accessibility install</string>
+    <string name="task_name">Task</string>
+    <string name="task_complete">is complete</string>
+    <string name="task_not_complete">is not complete</string>
+    <string name="task_complete_template">task </string>
+    <string name="action_settings">Test</string>
+</resources>

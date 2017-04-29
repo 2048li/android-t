@@ -1,13 +1,16 @@
 package com.example.shentanli.readlocal;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -23,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
         bt = (Button)findViewById(R.id.bt);
         bt.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
-                ImageView imageView;
-                imageView.setImageBitmap(getDiskBitMap());
+                Toast toast = Toast.makeText(MainActivity.this, "you click the button"+bt.getText().toString(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 150);
+                toast.show();
+
             }
         });
     }
@@ -33,6 +38,19 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, CHOOSE_IMAGE);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data ){
+        if(resultCode == Result_OK){
+            Uri uri = data.getData();
+            String img_url = uri.getPath();
+            ContentResolver cr = this.getContentResolver();
+            try{
+                Bitmap bm = getDiskBitMap(img_url);
+                ImageView iv =
+            }
+        }
+
     }
 
 
